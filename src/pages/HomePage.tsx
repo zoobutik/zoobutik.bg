@@ -7,7 +7,7 @@ import Newsletter from '../components/Newsletter';
 const HomePage = () => {
   return (
     <>
-      <Hero />
+      {/* <Hero /> */}
       <FeaturedProducts />
       <Features />
       {/* <Newsletter /> */}
