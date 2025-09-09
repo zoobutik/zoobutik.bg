@@ -6,7 +6,7 @@ const Features = () => {
     {
       icon: Truck,
       title: 'Безплатна доставка',
-      description: 'При поръчки над 50 лв/€ в цялата страна',
+      description: 'При поръчки над 100 лв. (51.13 €) в цялата страна',
       color: 'text-blue-500'
     },
     {
@@ -30,7 +30,7 @@ const Features = () => {
     {
       icon: Clock,
       title: 'Бърза доставка',
-      description: 'До 48 часа в София, до 72 часа в страната',
+      description: 'За цялата страна',
       color: 'text-red-500'
     },
     {
@@ -68,7 +68,7 @@ const Features = () => {
               </h3>
               
               <p className="text-gray-600 leading-relaxed">
-                При поръчки над 50 лв/€ в цялата страна
+                {feature.description}
               </p>
             </div>
           ))}

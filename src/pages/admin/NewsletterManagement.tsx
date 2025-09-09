@@ -57,22 +57,51 @@ const NewsletterManagement = () => {
     setMessage('');
 
     try {
-      // В реален проект тук би се качил файлът и изпратил имейл до всички абонати
-      // За демо целите ще симулираме процеса
-      
-      // Симулация на качване на файл
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Симулация на изпращане на имейли
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      setMessage(`Бюлетинът е изпратен успешно до ${subscribers.length} абоната!`);
+      // Прочитане на PDF файла като base64
+
+      // Безопасно конвертиране на голям файл към base64
+      const fileData = await selectedFile.arrayBuffer();
+      function arrayBufferToBase64(buffer: ArrayBuffer) {
+        let binary = '';
+        const bytes = new Uint8Array(buffer);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i += 0x8000) {
+          binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000) as any);
+        }
+        return window.btoa(binary);
+      }
+      const base64File = arrayBufferToBase64(fileData);
+
+      let successCount = 0;
+      let failCount = 0;
+
+      // Изпращане на email до всеки абонат чрез edge function
+      for (const sub of subscribers) {
+        try {
+          const res = await fetch('/functions/v1/send-newsletter-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: sub.email,
+              pdfBase64: base64File,
+              pdfName: selectedFile.name
+            })
+          });
+          if (res.ok) {
+            successCount++;
+          } else {
+            failCount++;
+          }
+        } catch (e) {
+          failCount++;
+        }
+      }
+
+      setMessage(`Бюлетинът е изпратен успешно до ${successCount} абоната! Грешки: ${failCount}`);
       setSelectedFile(null);
-      
       // Почистване на file input
       const fileInput = document.getElementById('newsletter-file') as HTMLInputElement;
       if (fileInput) fileInput.value = '';
-      
     } catch (error) {
       console.error('Error sending newsletter:', error);
       setMessage('Грешка при изпращане на бюлетина');

@@ -205,7 +205,7 @@ const CategoryPage = () => {
                       to={`/category/${category.slug}`}
                       className="block text-blue-600 hover:text-blue-800 font-medium"
                     >
-                      Всички {category.name.toLowerCase()}
+                      Всичко за {category.name.toLowerCase()}
                     </Link>
                     {subcategories.map(subcat => (
                       <Link

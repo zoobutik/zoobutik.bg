@@ -18,7 +18,7 @@ const Footer = () => {
           </Link>
 
           {/* Navigation - само продукти и контакти, подравнени вляво */}
-          <div className="flex flex-1 items-center justify-start w-full max-w-xl mx-4">
+          <div className="flex flex-1 items-center justify-center w-full max-w-xl mx-4">
             <div className="flex items-center space-x-8">
               <Link to="/products" className="hover:text-blue-400 transition-colors">Продукти</Link>
               <Link to="/contact" className="hover:text-blue-400 transition-colors">Контакти</Link>

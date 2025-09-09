@@ -46,7 +46,7 @@ const FeaturedProductsManagement = () => {
   };
 
   const addToFeatured = (productId: number) => {
-    if (featuredProducts.length < 8 && !featuredProducts.includes(productId)) {
+  if (featuredProducts.length < 16 && !featuredProducts.includes(productId)) {
       setFeaturedProducts([...featuredProducts, productId]);
     }
   };
@@ -87,7 +87,7 @@ const FeaturedProductsManagement = () => {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Препоръчани продукти</h1>
-              <p className="text-gray-600 mt-1">Изберете до 8 продукта за показване на началната страница</p>
+              <p className="text-gray-600 mt-1">Изберете до 16 продукта за показване на началната страница</p>
             </div>
             <button
               onClick={saveFeaturedProducts}
@@ -118,7 +118,7 @@ const FeaturedProductsManagement = () => {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-gray-900">
-                  Препоръчани продукти ({featuredProducts.length}/8)
+                  Препоръчани продукти ({featuredProducts.length}/16)
                 </h2>
                 <div className="text-sm text-gray-500">
                   Влачете за пренареждане
@@ -206,13 +206,13 @@ const FeaturedProductsManagement = () => {
                     </div>
                     <button
                       onClick={() => addToFeatured(product.id)}
-                      disabled={featuredProducts.length >= 8}
+                      disabled={featuredProducts.length >= 16}
                       className={`p-2 rounded-lg transition-colors ${
-                        featuredProducts.length >= 8
+                        featuredProducts.length >= 16
                           ? 'text-gray-400 cursor-not-allowed'
                           : 'text-blue-500 hover:text-blue-700 hover:bg-blue-50'
                       }`}
-                      title={featuredProducts.length >= 8 ? 'Максимум 8 продукта' : 'Добави към препоръчани'}
+                      title={featuredProducts.length >= 16 ? 'Максимум 16 продукта' : 'Добави към препоръчани'}
                     >
                       <Plus className="w-5 h-5" />
                     </button>
@@ -233,7 +233,7 @@ const FeaturedProductsManagement = () => {
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-blue-900 mb-3">Инструкции</h3>
           <ul className="text-blue-800 space-y-2 text-sm">
-            <li>• Можете да изберете до 8 продукта за показване като препоръчани на началната страница</li>
+            <li>• Можете да изберете до 16 продукта за показване като препоръчани на началната страница</li>
             <li>• Използвайте търсачката за да намерите конкретни продукти</li>
             <li>• Редът на продуктите в списъка "Препоръчани продукти" определя реда на показване</li>
             <li>• Не забравяйте да запазите промените след редактиране</li>
